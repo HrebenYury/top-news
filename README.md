@@ -15,3 +15,6 @@ And then go to the timon folder and enter in terminal `npm start`.
 In this project I made a simple server with express. On server side I processed POST, GET, PUT and DELETE requests.
 
 On the Form page you can add new article and then this article will save in article.json file on server side Also you can find the articles by date, edit the articles and delete it. If you prefer the dark or light theme, you can swith it with toogle button in header. This application is adaptive. On other pages you can watch some articles or news.
+
+
+![Alt-текст](https://sun9-15.userapi.com/impg/eA1IzDfIjhn4MgJPNRkKLrBNLYSb0eQTIbHoMg/G5Vjt8keRgQ.jpg?size=1366x768&quality=96&sign=886eddcbf61c3ac74912d2df2cc792da&type=album "main")
