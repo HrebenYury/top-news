@@ -1,0 +1,200 @@
+.formContainer {
+  padding-top: 80px;
+  width: 90%;
+  max-width: 1240px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: auto;
+  grid-gap: 20px;
+}
+
+@media only screen and (min-width: 850px) {
+  .formContainer {
+    grid-template-columns: 1fr 2fr;
+  }
+}
+
+.formField {
+  form {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .title {
+    font-size: 20px;
+    resize: none;
+    height: 40px;
+    border-radius: 4px;
+    padding: 10px;
+    line-height: 1.4;
+  }
+
+  .bigText {
+    font-size: 16px;
+    resize: none;
+    height: 150px;
+    border-radius: 4px;
+    padding: 10px;
+    line-height: 1.4;
+  }
+
+  label {
+    margin-top: 20px;
+  }
+
+  ::-webkit-scrollbar {
+    width: 10px;
+    height: 10px;
+  }
+  ::-webkit-scrollbar-track-piece {
+    background-color: #eee;
+    border-radius: 16px;
+  }
+  ::-webkit-scrollbar-thumb:vertical {
+    background-color: #666;
+    border: 1px solid #eee;
+    border-radius: 16px;
+  }
+}
+
+.formButtonsContainer {
+  flex-direction: row;
+  font-size: 10px;
+  margin-top: 15px;
+
+  .btn {
+    font-size: 16px;
+    margin-right: 20px;
+    width: 100px;
+    height: 50px;
+    color: #fff;
+    text-transform: uppercase;
+    border: none;
+    font-weight: bold;
+    &:hover {
+      transform: scale(1.1);
+    }  
+  }
+
+  .addBtn {
+    background: #2ee59d;
+    box-shadow: 0 15px 20px #2ee59d66;
+  }
+  .resetBtn {
+    background: #e5622e;
+    box-shadow: 0 15px 20px #e5532e66;
+  }
+
+  .btn:disabled {
+    background: #669482;
+    color: rgb(196, 196, 196);
+    box-shadow: 0 0 0 0 #2ee59d66;
+    &:hover {
+      transform: scale(1);
+    }
+  }
+}
+
+.dateInput {
+  padding-top: 20px;
+  input {
+    border: 1px solid #c4c4c4;
+    font-size: 15px;
+    border-radius: 5px;
+    background-color: #fff;
+    padding: 5px 5px;
+    box-shadow: inset 0 3px 6px rgba(0,0,0,0.1);
+    width: 170px;
+  }
+  button{
+    cursor: pointer;
+    margin-left: 10px;
+    padding: 5px 5px;
+    font-size: 25px;
+    border: none;
+    background: none;
+    color: #3c4eb4;
+    &:hover {
+      transform: scale(1.1);
+    }   
+  }
+}
+
+
+/*
+|||||||||||||||||| Finded Articles |||||||||||||||||||||||
+*/
+
+
+.findedArticles {
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: auto;
+  grid-gap: 20px;
+}
+
+@media only screen and (min-width: 850px) {
+  .findedArticles {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+.findedCard{
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+  article{
+    padding: 20px;
+    display: grid;
+    grid-template-areas: 
+    "title delete"
+    "bigText bigText"
+    "date edit";
+  }
+
+  h1{
+    grid-area: title;
+    font-size: 20px;
+    margin: 0;
+  }
+  p{
+    grid-area: bigText;
+    margin: 0;
+    line-height: 1.4;
+    flex: 1;
+  }
+  span{
+    grid-area: date;
+    font-size: 12px;
+    font-weight: bold;
+    color: #999;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    margin: 2em 0 0 0;
+  }
+
+  .editArticle{
+    grid-area: edit;
+    cursor: pointer;
+    justify-self: end;
+    font-size: 25px;
+    border: none;
+    background: none;
+    color: #3cb685;
+    &:hover {
+      transform: scale(1.1);
+    }   
+  }
+
+  .deleteArticle {
+    cursor: pointer;
+    justify-self: end;
+    font-size: 25px;
+    border: none;
+    background: none;
+    color: #e5622e;
+    grid-area: delete;
+    &:hover {
+      transform: scale(1.1);
+    }
+  }
+}

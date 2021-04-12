@@ -1,0 +1,64 @@
+/**********************************Swither theme**********************************/
+.switch {
+  padding: 13px 0 0 13px;
+  grid-area: logo;
+  input[type="checkbox"] {
+    display: none;
+
+    &:checked + label {
+      background-color: #cfd8ce;
+    }
+    &:checked + label:after {
+      left: 38px;
+    }
+  }
+
+  label {
+    transition: all 200ms ease-in-out;
+    display: inline-block;
+    position: relative;
+    height: 25px;
+    width: 60px;
+    border-radius: 20px;
+    cursor: pointer;
+    background-color: #3d3a3a;
+    color: transparent;
+
+    &:after {
+      transition: all 200ms ease-in-out;
+      content: " ";
+      position: absolute;
+      height: 19px;
+      width: 19px;
+      border-radius: 50%;
+      background-color: white;
+      top: 3px;
+      left: 3px;
+      right: auto;
+      box-shadow: 1px 1px 1px gray;
+    }
+  }
+}
+
+
+/**********************************Theme styles**********************************/
+
+.blackTheme {
+  background-color: #3f3f3f;
+  color: white;
+}
+
+.whiteTheme {
+  background-color: #ffffff;
+  color: rgb(26, 20, 20);
+}
+
+.bodyBlackTheme {
+  background-color: #121212;
+  color: white;
+}
+
+.bodyWhiteTheme {
+  background-color: #fdfdfd;
+  color: rgb(26, 20, 20);
+}

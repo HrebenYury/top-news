@@ -1,0 +1,24 @@
+@import "header";
+@import "theme";
+@import "form";
+@import "cards";
+
+*{
+  font-family: "Montserrat", sans-serif;
+}
+
+body {
+  margin: 0;
+}
+
+$errorBlock: rgba(131, 212, 148, 0.3);
+
+.errorBox {
+  background-color: $errorBlock;
+  max-width: 600px;
+  text-align: center;
+  font-size: 30px;
+  margin: 100px auto;
+  padding: 20px;
+  border-radius: 10px;
+}
