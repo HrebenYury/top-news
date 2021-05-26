@@ -1,23 +1,24 @@
 import React, { useState } from "react";
-import {CardForFormPage} from '../mainContainer'
-import Search from './Search';
-export function FormComponent({ fetchArticlesIfNeed, searchArticlesByDate, articles }) {
+import CardForFormPage from './CardForFormPage';
+import { connect } from "react-redux";
+import { fetchArticlesIfNeed, searchArticlesByDate } from "../actions/index";
+import Search from "./Search";
 
-  const [title, setTitle] = useState('');
-  const [text, setText] = useState('');
+export function Form({ fetchArticlesIfNeed, searchArticlesByDate, articles }) {
+  const [title, setTitle] = useState("");
+  const [text, setText] = useState("");
   const [id, setID] = useState(0);
-  const [date, setDate] = useState('');
-
+  const [date, setDate] = useState("");
 
   const changeTitle = (e) => {
     e.preventDefault();
     setTitle(e.currentTarget.value);
-  }
+  };
 
   const changeText = (e) => {
     e.preventDefault();
     setText(e.currentTarget.value);
-  }
+  };
 
   const submitButton = (e) => {
     e.preventDefault();
@@ -26,63 +27,69 @@ export function FormComponent({ fetchArticlesIfNeed, searchArticlesByDate, artic
     } else {
       editArticle();
     }
-  }
+  };
 
   const editArticle = async () => {
     await fetch("http://localhost:3001/api/articles", {
       method: "PUT",
-      headers: { "Accept": "application/json", "Content-Type": "application/json" },
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json",
+      },
       body: JSON.stringify({
         id: id,
         title: title,
-        text: text
-      })
+        text: text,
+      }),
     });
     fetchArticlesIfNeed();
     searchArticlesByDate(date);
     setID(0);
-    setTitle('');
-    setText('');
-  }
+    setTitle("");
+    setText("");
+  };
 
   const submitArticle = async () => {
     await fetch("http://localhost:3001/api/add", {
       method: "POST",
-      headers: { "Accept": "application/json", "Content-Type": "application/json" },
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json",
+      },
       body: JSON.stringify({
         articleTitle: title,
-        articleDescription: text
-      })
-    })
+        articleDescription: text,
+      }),
+    });
     fetchArticlesIfNeed();
     setID(0);
-    setTitle('');
-    setText('');
-  }
+    setTitle("");
+    setText("");
+  };
 
   const deleteArticle = async (e) => {
-    const id = e.currentTarget.id
+    const id = e.currentTarget.id;
     await fetch(`http://localhost:3001/api/articles/${id}`, {
       method: "DELETE",
-      headers: { "Accept": "application/json" }
-    })
+      headers: { Accept: "application/json" },
+    });
     fetchArticlesIfNeed();
     searchArticlesByDate(date);
-  }
+  };
 
   const getArticle = async (e) => {
     const id = e.currentTarget.id;
     const response = await fetch(`http://localhost:3001/api/articles/${id}`, {
       method: "GET",
-      headers: { "Accept": "application/json" }
-    })
+      headers: { Accept: "application/json" },
+    });
     if (response.ok) {
       const article = await response.json();
       setID(article.id);
       setTitle(article.title);
       setText(article.article);
     }
-  }
+  };
 
   const validate = () => {
     if (title.trim() && text.trim()) {
@@ -90,33 +97,34 @@ export function FormComponent({ fetchArticlesIfNeed, searchArticlesByDate, artic
     } else {
       return false;
     }
-  }
+  };
 
   const resetForm = (e) => {
     e.preventDefault();
     setID(0);
-    setTitle('');
-    setText('');
-  }
+    setTitle("");
+    setText("");
+  };
 
   const showSerachByDate = () => {
     if (articles.length === 0) {
-      return <p>nothing to find</p>
+      return <p>nothing to find</p>;
     } else {
-      return (articles.map((i) =>
+      return articles.map((i) => (
         <CardForFormPage
           key={i.id}
           article={i}
           remove={deleteArticle}
           edit={getArticle}
-        />))
+        />
+      ));
     }
-  }
+  };
 
   const dateInput = (date) => {
     setDate(date);
     searchArticlesByDate(date);
-  }
+  };
 
   return (
     <div className="formContainer">
@@ -125,9 +133,17 @@ export function FormComponent({ fetchArticlesIfNeed, searchArticlesByDate, artic
         <form onSubmit={submitButton}>
           <input type="hidden" name="id" value={id} />
           <label>Title</label>
-          <textarea className="title" onChange={changeTitle} value={title}></textarea>
+          <textarea
+            className="title"
+            onChange={changeTitle}
+            value={title}
+          ></textarea>
           <label>Article</label>
-          <textarea className="bigText" onChange={changeText} value={text}></textarea>
+          <textarea
+            className="bigText"
+            onChange={changeText}
+            value={text}
+          ></textarea>
           <div className="formButtonsContainer">
             <button
               className="addBtn btn"
@@ -136,10 +152,7 @@ export function FormComponent({ fetchArticlesIfNeed, searchArticlesByDate, artic
             >
               Add
             </button>
-            <button
-              className="resetBtn btn"
-              onClick={resetForm}
-            >
+            <button className="resetBtn btn" onClick={resetForm}>
               reset
             </button>
           </div>
@@ -148,12 +161,23 @@ export function FormComponent({ fetchArticlesIfNeed, searchArticlesByDate, artic
       </div>
       <div className="searchField">
         <h2>Artciles by date</h2>
-        <div className="findedArticles">
-          {
-            articles && showSerachByDate()
-          }
-        </div>
+        <div className="findedArticles">{articles && showSerachByDate()}</div>
       </div>
     </div>
   );
 }
+
+export default connect(
+  (store) => ({
+    articles: store.content.dateSearch,
+    error: store.errorSearch,
+  }),
+  (dispatch) => ({
+    fetchArticlesIfNeed: () => {
+      dispatch(fetchArticlesIfNeed());
+    },
+    searchArticlesByDate: (date) => {
+      dispatch(searchArticlesByDate(date));
+    },
+  })
+)(Form);

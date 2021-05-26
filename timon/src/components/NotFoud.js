@@ -5,7 +5,7 @@ import { faGrinTongueWink } from '@fortawesome/free-solid-svg-icons'
 const NotFound = () => {
     
     return (
-        <div className='errorBox' >        
+        <div className='errorBox' >    
             <p><FontAwesomeIcon icon={faGrinTongueWink}/>   Bad News. Something wrong.</p>
         </div>
     );

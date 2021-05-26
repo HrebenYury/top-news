@@ -1,19 +1,19 @@
 import React from "react";
-import { CardForArticlesPage } from '../mainContainer'
-import NotFound from './NotFoud';
+import { connect } from "react-redux";
+import CardForArticlesPage from "./CardForArticlesPage";
+import NotFound from "./NotFoud";
 
-export const ArticlesPage = ({ articles, error }) => {
-    return (
-        <div className="containerArticlesPage myArticle">
-            {articles && articles.map((i) =>
-                <CardForArticlesPage
-                    key={i.id}
-                    article={i}
-                />
-            )}
-            {error && <NotFound />}
-        </div>
-    )
-}
+export const Articles = ({ articles, error }) => {
+  return (
+    <div className="containerArticlesPage myArticle">
+      {articles &&
+        articles.map((i) => <CardForArticlesPage key={i.id} article={i} />)}
+      {error && <NotFound />}
+    </div>
+  );
+};
 
-
+export default connect((store) => ({
+  articles: store.content.articles,
+  error: store.errorMyArticles,
+}))(Articles);
