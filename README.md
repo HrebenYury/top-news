@@ -8,7 +8,7 @@ If you want to download this project on your computer and then run it. You need 
 ```
 The API key i got here [newsapi.orgt](https://newsapi.org/) .
 
-To start server - enter in the terminal `npm run dev`. 
+To start server - go to the `server` directory and enter in the terminal `npm run dev`. 
 
 And then go to the timon folder and enter in terminal `npm start`.
 

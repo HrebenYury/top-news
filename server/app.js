@@ -182,8 +182,7 @@ function dataToCategories(data, categories) {
 }
 
 app.get("/api/news", (req, res) => {
-  //let categories = ['sports','technology','science'];
-  let categories = ['sports'];
+  let categories = ['sports','technology','science'];
   const api_key = process.env.API_KEY_NEWS;
   let requests = categories.map(category => fetch(`https://newsapi.org/v2/top-headlines?country=ru&category=${category}&apiKey=${api_key}`));
 
